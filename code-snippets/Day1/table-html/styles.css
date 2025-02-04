@@ -1,0 +1,11 @@
+table, td {
+    border: 2px solid black;
+    border-spacing: 0;
+    border-collapse: collapse;
+    height: 40px;
+    width: 400px;
+}
+
+.rowspan {
+    height: 80px;
+}
