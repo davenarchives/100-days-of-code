@@ -3,11 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Push Notification</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .notification-container {
+            position: fixed;
+            bottom: 20px;
+            left: -300px; /* Start hidden */
+            width: 250px;
+            background-color: #333;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            transition: left 0.5s ease-in-out;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .show {
+            left: 20px; /* Slide in */
+        }
+
+        .close-btn {
+            color: white;
+            background: none;
+            border: none;
+            font-size: 16px;
+            float: right;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <
+
+    <button onclick="requestPermission()">Allow Notifications</button>
+
+    <div class="notification-container" id="notification">
+        <button class="close-btn" onclick="closeNotification()">×</button>
+        <p>You have a new notification!</p>
     </div>
+
+    <script>
+        function requestPermission() {
+            Notification.requestPermission().then(permission => {
+                if (permission === "granted") {
+                    showNotification();
+                } else {
+                    alert("Notifications are blocked!");
+                }
+            });
+        }
+
+        function showNotification() {
+            let notificationBox = document.getElementById("notification");
+            notificationBox.classList.add("show");
+
+            setTimeout(() => {
+                notificationBox.classList.remove("show");
+            }, 5000); // Auto-close after 5 seconds
+        }
+
+        function closeNotification() {
+            document.getElementById("notification").classList.remove("show");
+        }
+    </script>
+
 </body>
 </html>
